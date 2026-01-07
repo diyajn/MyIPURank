@@ -15,6 +15,39 @@ Future modules will include:
 
 **Tech Stack:** Java, Spring Boot, MySQL/PostgreSQL, PDFBox, REST API.
 
+
+---
+## High-Level Architecture
+
+
+```
+┌────────────┐
+│  Websites  │
+│ (HTML + PDF)
+└─────┬──────┘
+      │ Jsoup (fetch PDF links)
+┌─────▼──────┐
+│ PDF URLs   │
+└─────┬──────┘
+      │ PDFBox (extract raw text)
+┌─────▼────────────┐
+│ Raw PDF Text     │
+└─────┬────────────┘
+      │ College-wise Parser
+┌─────▼────────────┐
+│ Normalized Data  │
+│ (PlacementRecord)
+└─────┬────────────┘
+      │ JPA
+┌─────▼────────────┐
+│   MySQL DB       │
+└─────┬────────────┘
+      │ REST APIs
+┌─────▼────────────┐
+│ Frontend (React) │
+└──────────────────┘
+
+```
 ---
 
 
