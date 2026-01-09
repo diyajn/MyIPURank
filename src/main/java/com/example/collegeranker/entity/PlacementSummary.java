@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(
+@Table(name = "placement_summary",
         indexes = {
                 @Index(name = "idx_college_year", columnList = "college_year_id"),
                 @Index(name = "idx_company", columnList = "companyName")
@@ -17,16 +17,20 @@ public class PlacementSummary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "college_year_id")
     private CollegeAcademicYear collegeAcademicYear;
 
+    @Column(name = "company_name")
     private String companyName;
 
+    @Column(name = "package_lpa")
     private Double packageLpa;
 
+    @Column(name = "students_placed")
     private int studentsPlaced;
 }
+
 
 
 

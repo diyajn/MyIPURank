@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
+@Table(name = "college_academic_year")
 @Data
 public class CollegeAcademicYear {
 
@@ -11,12 +12,14 @@ public class CollegeAcademicYear {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "college_id")
     private College college;
 
-    private String yearLabel; // e.g. "2019-2023"
+    @Column(name = "year_label")
+    private String yearLabel;
 }
+
 
 
 

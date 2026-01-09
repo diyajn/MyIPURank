@@ -15,6 +15,8 @@ public interface PlacementSummaryRepository
     findByCollegeAcademicYear_College_NameAndCollegeAcademicYear_YearLabel(
             String collegeName,
             String yearLabel);
+
+    List<PlacementSummary> findByCollegeAcademicYear_Id(Long collegeYearId);
 }
 
 

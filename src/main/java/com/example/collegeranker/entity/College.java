@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
+@Table(name = "college")
 @Data
 public class College {
 
@@ -13,11 +14,13 @@ public class College {
 
     private String name;
 
+    @Column(name = "placement_page_url")
     private String placementPageUrl;
 
-    // ONLY for MAIT
+    @Column(name = "cay_page_url")
     private String cayPageUrl;
 }
+
 
 
 
