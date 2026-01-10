@@ -20,7 +20,7 @@ public class BpitPlacementParser implements PlacementParser {
         Map<String, PlacementSummary> resultMap = new LinkedHashMap<>();
         String[] lines = text.split("\\r?\\n");
 
-        System.out.println("\n========== BPIT PARSER DEBUG ==========");
+
 
         for (String raw : lines) {
 
@@ -73,18 +73,13 @@ public class BpitPlacementParser implements PlacementParser {
                     ps.setStudentsPlaced(ps.getStudentsPlaced() + 1);
                 }
 
-                System.out.println(
-                        "✅ ACCEPTED | Company=" + company +
-                                " | Package=" + packageLpa +
-                                " | Count=" + ps.getStudentsPlaced()
-                );
 
             } catch (Exception e) {
                 System.out.println("❌ PARSE ERROR | " + line);
             }
         }
 
-        System.out.println("========== BPIT PARSER END ==========\n");
+
         return new ArrayList<>(resultMap.values());
     }
 

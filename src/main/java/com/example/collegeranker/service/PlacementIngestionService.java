@@ -18,7 +18,6 @@ public class PlacementIngestionService {
     private final CollegeRepository collegeRepo;
     private final CollegeAcademicYearRepository yearRepo;
     private final PlacementSummaryRepository summaryRepo;
-
     private final PdfLinkFetcher linkFetcher = new PdfLinkFetcher();
     private final PdfTextExtractor textExtractor = new PdfTextExtractor();
 
@@ -33,13 +32,11 @@ public class PlacementIngestionService {
     }
 
     public void ingestById(Long collegeId) throws Exception {
-
         College college = collegeRepo.findById(collegeId)
                 .orElseThrow(() ->
                         new IllegalArgumentException(
                                 "College not found with id " + collegeId)
                 );
-
         ingestCollege(college);
     }
 
@@ -50,7 +47,6 @@ public class PlacementIngestionService {
                 college.getPlacementPageUrl(),
                 college.getCayPageUrl()
         );
-
         System.out.println("\n================== START FETCH ==================");
         System.out.println("College: " + college.getName());
         System.out.println("Total PDFs found: " + pdfs.size());
@@ -61,16 +57,10 @@ public class PlacementIngestionService {
 
             String pdfUrl = entry.getKey();
             String linkText = entry.getValue();
-
-            System.out.println("\n🔹 FETCHED PDF URL : " + pdfUrl);
-            System.out.println("🔹 LINK TEXT       : " + linkText);
-
             String pdfText = textExtractor.extract(pdfUrl);
-
             String yearLabel =
                     AcademicYearExtractor.extract(linkText, pdfUrl, pdfText);
 
-            System.out.println("🎯 EXTRACTED YEAR  : " + yearLabel);
 
             if (yearLabel == null|| Integer.parseInt(yearLabel) < 2022) {
                 System.out.println("❌ SKIPPING PDF (year not found)");

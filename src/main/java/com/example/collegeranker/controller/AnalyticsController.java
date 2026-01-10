@@ -1,12 +1,8 @@
 package com.example.collegeranker.controller;
 
 import com.example.collegeranker.dto.CollegeAnalyticsDTO;
-import com.example.collegeranker.entity.College;
-import com.example.collegeranker.entity.CollegeAcademicYear;
-import com.example.collegeranker.entity.PlacementSummary;
-import com.example.collegeranker.repository.CollegeAcademicYearRepository;
-import com.example.collegeranker.repository.CollegeRepository;
-import com.example.collegeranker.repository.PlacementSummaryRepository;
+import com.example.collegeranker.entity.*;
+import com.example.collegeranker.repository.*;
 import com.example.collegeranker.service.analytics.CollegeAnalyticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,20 +23,24 @@ public class AnalyticsController {
     private final CollegeRepository collegeRepo;
     private final CollegeAcademicYearRepository cayRepo;
     private final PlacementSummaryRepository placementRepo;
+    private final CollegeStudentStatsRepository studentStatsRepo;
+    private final FacultyMemberRepository facultyRepo;
     private final CollegeAnalyticsService analyticsService;
 
     @GetMapping("/colleges/{yearLabel}")
     public List<CollegeAnalyticsDTO> getCollegeAnalytics(
             @PathVariable String yearLabel) {
-        yearLabel = yearLabel.trim(); // ✅ CRITICAL LINE
+
+        yearLabel = yearLabel.trim(); // 🔴 IMPORTANT
+
         List<College> colleges = collegeRepo.findAll();
-        System.out.println(colleges.size());
         List<CollegeAnalyticsDTO> result = new ArrayList<>();
 
         for (College college : colleges) {
+
             Optional<CollegeAcademicYear> cayOpt =
                     cayRepo.findByCollegeAndYearLabel(college, yearLabel);
-            System.out.println("cayOpt"+cayOpt);
+
             if (cayOpt.isEmpty()) continue;
 
             CollegeAcademicYear cay = cayOpt.get();
@@ -48,8 +48,20 @@ public class AnalyticsController {
             List<PlacementSummary> placements =
                     placementRepo.findByCollegeAcademicYear_Id(cay.getId());
 
+            CollegeStudentStats stats =
+                    studentStatsRepo.findByCollegeYear(cay)
+                            .orElse(null);
+
+            List<FacultyMember> faculty =
+                    facultyRepo.findByCollegeYear(cay);
+
             CollegeAnalyticsDTO dto =
-                    analyticsService.buildDTO(cay, placements);
+                    analyticsService.buildDTO(
+                            cay,
+                            placements,
+                            stats,
+                            faculty
+                    );
 
             result.add(dto);
         }
@@ -59,6 +71,7 @@ public class AnalyticsController {
     }
 
     private void applyRanking(List<CollegeAnalyticsDTO> list) {
+
         list.sort(Comparator.comparingDouble(
                 CollegeAnalyticsDTO::getScore).reversed());
 
@@ -67,5 +80,6 @@ public class AnalyticsController {
         }
     }
 }
+
 
 

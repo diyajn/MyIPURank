@@ -14,7 +14,7 @@ public class MsitPlacementParser implements PlacementParser {
         List<PlacementSummary> results = new ArrayList<>();
         String[] lines = text.split("\\r?\\n");
 
-        System.out.println("\n========== MSIT PARSER DEBUG ==========");
+
 
         for (String raw : lines) {
 
@@ -88,19 +88,14 @@ public class MsitPlacementParser implements PlacementParser {
 
                 results.add(ps);
 
-                System.out.println(
-                        "✅ ACCEPTED | SNo=" + sno +
-                                " | Company=" + company +
-                                " | CTC=" + ctc +
-                                " | Total=" + total
-                );
+
 
             } catch (Exception e) {
                 System.out.println("❌ PARSE ERROR | SNo=" + sno + " | " + line);
             }
         }
 
-        System.out.println("========== MSIT PARSER END ==========\n");
+
         return results;
     }
 }

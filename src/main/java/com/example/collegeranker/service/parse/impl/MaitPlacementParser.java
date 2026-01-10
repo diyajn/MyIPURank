@@ -14,7 +14,7 @@ public class MaitPlacementParser implements PlacementParser {
         List<PlacementSummary> results = new ArrayList<>();
         String[] lines = text.split("\\r?\\n");
 
-        System.out.println("\n========== MAIT PARSER DEBUG ==========");
+
 
         boolean is2025Table = false;
 
@@ -83,12 +83,6 @@ public class MaitPlacementParser implements PlacementParser {
 
                     results.add(ps);
 
-                    System.out.println(
-                            "✅ 2025 ROW | SNo=" + sno +
-                                    " | Company=" + company +
-                                    " | Salary(LPA)=" + salaryLpa +
-                                    " | Total=" + total
-                    );
                     continue;
                 }
 
@@ -114,20 +108,13 @@ public class MaitPlacementParser implements PlacementParser {
 
                 results.add(ps);
 
-                System.out.println(
-                        "✅ OLD YEAR ROW | SNo=" + sno +
-                                " | Company=" + company +
-                                " | Salary(LPA)=" + salaryLpa +
-                                " | Total=" + total +
-                                " → Using OLD logic"
-                );
 
             } catch (Exception e) {
                 System.out.println("❌ PARSE ERROR | SNo=" + sno + " | " + line);
             }
         }
 
-        System.out.println("========== MAIT PARSER END ==========\n");
+
         return results;
     }
 }

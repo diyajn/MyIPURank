@@ -10,7 +10,17 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
+
 public class PdfLinkFetcher {
+
+    public Map<String, String> fetchNirfLinks(String nirfPageUrl) throws Exception {
+        Map<String, String> pdfMap = new LinkedHashMap<>();
+        fetchFromPage("NIRF", nirfPageUrl, pdfMap); // no college-specific rules
+        return pdfMap;
+    }
+
+
+
 
     /**
      * Returns:

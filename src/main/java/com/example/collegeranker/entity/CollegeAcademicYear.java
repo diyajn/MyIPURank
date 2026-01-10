@@ -18,6 +18,9 @@ public class CollegeAcademicYear {
 
     @Column(name = "year_label")
     private String yearLabel;
+
+    @Column(name = "nirf_report_url")
+    private String nirfReportUrl;
 }
 
 

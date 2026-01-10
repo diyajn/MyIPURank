@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/placements")
-public class PlacementController {
+public class PlacementsController {
 
     private final PlacementIngestionService ingestionService;
     private final PlacementSummaryRepository summaryRepo;
 
-    public PlacementController(
+    public PlacementsController(
             PlacementIngestionService ingestionService,
             PlacementSummaryRepository summaryRepo) {
 
@@ -22,14 +22,7 @@ public class PlacementController {
         this.summaryRepo = summaryRepo;
     }
 
-    // 1️⃣ Trigger ingestion
-    @PostMapping("/ingest/{collegeId}")
-    public String ingest(@PathVariable Long collegeId) throws Exception {
-        ingestionService.ingestById(collegeId);
-        return "Ingestion completed for collegeId = " + collegeId;
-    }
-
-    // 2️⃣ All data of a college
+    //  All data of a college
     @GetMapping("/college/{collegeName}")
     public List<PlacementSummary> byCollege(
             @PathVariable String collegeName) {
@@ -38,18 +31,18 @@ public class PlacementController {
                 .findByCollegeAcademicYear_College_Name(collegeName);
     }
 
-    // 3️⃣ College + Year
+    // College + Year
     @GetMapping("/college/{collegeName}/year/{year}")
     public List<PlacementSummary> byCollegeAndYear(
             @PathVariable String collegeName,
             @PathVariable String year) {
 
-        // 1️⃣ Fetch from DB
+        //  Fetch from DB
         List<PlacementSummary> list =
                 summaryRepo.findByCollegeAcademicYear_College_NameAndCollegeAcademicYear_YearLabel(
                         collegeName, year);
 
-        // 2️⃣ Print to console (HUMAN READABLE)
+        // Print to console (HUMAN READABLE)
         System.out.println("\n========= DATA FETCHED FROM DB =========");
         System.out.printf("%-30s %-12s %-10s%n",
                 "COMPANY", "PACKAGE(LPA)", "STUDENTS");
@@ -63,12 +56,12 @@ public class PlacementController {
 
         System.out.println("=======================================\n");
 
-        // 3️⃣ Return as JSON (unchanged)
+        // Return as JSON (unchanged)
         return list;
     }
 
 
-    // 4️⃣ Summary (same data, frontend can aggregate)
+    //  Summary (same data, frontend can aggregate)
     @GetMapping("/college/{collegeName}/summary")
     public List<PlacementSummary> summary(
             @PathVariable String collegeName) {

@@ -19,6 +19,9 @@ public class College {
 
     @Column(name = "cay_page_url")
     private String cayPageUrl;
+
+    @Column(name = "nirf_page_url")   // NEW FIELD
+    private String nirfPageUrl;       // e.g. https://bpitindia.ac.in/nirf-reports/
 }
 
 

@@ -15,16 +15,18 @@ public class CollegeDataInitializer {
 
             insert(repo, "BPIT",
                     "https://bpitindia.ac.in/placement-record/",
-                    null);
+                    null,
+                    "https://bpitindia.ac.in/nirf/?preview_id=2085");
 
             insert(repo, "MSIT",
                     "https://www.msit.in/placements",
-                    null);
+                    null,
+                    "https://www.msit.in/nirf");
 
             insert(repo, "MAIT",
                     "https://mait.ac.in/index.php/placements/placement-details.html?view=article&id=1400:previous-years-placement&catid=10",
-                    "https://mait.ac.in/index.php/placements/placement-details.html");
-
+                    "https://mait.ac.in/index.php/placements/placement-details.html",
+                    null);
         };
     }
 
@@ -32,7 +34,8 @@ public class CollegeDataInitializer {
             CollegeRepository repo,
             String name,
             String placementUrl,
-            String cayUrl
+            String cayUrl,
+            String nirfUrl
     ) {
         repo.findByNameIgnoreCase(name)
                 .orElseGet(() -> {
@@ -40,6 +43,7 @@ public class CollegeDataInitializer {
                     c.setName(name);
                     c.setPlacementPageUrl(placementUrl);
                     c.setCayPageUrl(cayUrl);
+                    c.setNirfPageUrl(nirfUrl);
                     return repo.save(c);
                 });
     }
