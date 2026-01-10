@@ -5,10 +5,7 @@ import com.example.collegeranker.entity.*;
 import com.example.collegeranker.repository.*;
 import com.example.collegeranker.service.analytics.CollegeAnalyticsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/analytics")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AnalyticsController {
 
     private final CollegeRepository collegeRepo;
@@ -26,6 +24,10 @@ public class AnalyticsController {
     private final CollegeStudentStatsRepository studentStatsRepo;
     private final FacultyMemberRepository facultyRepo;
     private final CollegeAnalyticsService analyticsService;
+
+
+
+
 
     @GetMapping("/colleges/{yearLabel}")
     public List<CollegeAnalyticsDTO> getCollegeAnalytics(
