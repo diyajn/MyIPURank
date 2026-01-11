@@ -26,7 +26,7 @@ public class CollegeDataInitializer {
             insert(repo, "MAIT",
                     "https://mait.ac.in/index.php/placements/placement-details.html?view=article&id=1400:previous-years-placement&catid=10",
                     "https://mait.ac.in/index.php/placements/placement-details.html",
-                    null);
+                    "https://mait.ac.in/index.php/component/content/article/nirf.html?catid=9&Itemid=384");
         };
     }
 

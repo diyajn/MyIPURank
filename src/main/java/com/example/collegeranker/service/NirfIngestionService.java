@@ -161,6 +161,11 @@ public class NirfIngestionService {
             map.put("2023", "https://www.msit.in/media/2023/01/24/maharaja-surajmal-institute-of-technology20230119-.pdf");
             map.put("2024", "https://www.msit.in/media/2024/02/29/maharaja-surajmal-institute-of-technology-engineering.pdf");
             map.put("2025", "https://www.msit.in/media/uploads/2025/06/18/nirf-2025-engineering.pdf");
+        } else if (collegeName.equalsIgnoreCase("MAIT")) {
+            map.put("2022", "https://mait.ac.in/images/nirf/nirf22/MAHARAJA_AGRASEN_INSTITUTE_OF_TECHNOLOGY20220207-ENGG.pdf");
+            map.put("2023", "https://mait.ac.in/images/nirf/nirf23/MAHARAJA_AGRASEN_INSTITUTE_OF_TECHNOLOGY20230105-ENGINEERING.pdf");
+            map.put("2024", "https://mait.ac.in/images/nirf/nirf24/MAHARAJA_AGRASEN_INSTITUTE_OF_TECHNOLOGY-ENGINEERING.pdf");
+            map.put("2025", "https://mait.ac.in/images/nirf/nirf25/ENGG-MAHARAJA_AGRASEN_INSTITUTE_OF_TECHNOLOGY20250108-.pdf");
         }
 
         return map;
